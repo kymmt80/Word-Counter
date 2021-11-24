@@ -35,18 +35,20 @@ int main(int argc, char const *argv[])
         }
         word_map[temp]=(word_map.count(temp))?word_map[temp]+1:1;
     }
+    //cout<<"ok!"<<endl;
+    temp="";
+    for (auto pair: word_map) {
+        temp=temp+pair.first+",";
+        //write(fd,temp.c_str(),temp.size());
+        temp=temp+to_string(pair.second)+",";
+        //write(fd,temp.c_str(),temp.size());
+        //cout << "{" << pair.first << ": " << pair.second << "}"<<endl;
+    }
     mkfifo(FIFO_ADDR.c_str(),0666);
     if((fd=open(FIFO_ADDR.c_str(),O_RDWR))<0){
         cout<<"error opening pipe"<<endl;
     }
-    cout<<"ok!"<<endl;
-    for (auto pair: word_map) {
-        temp=pair.first+"\n";
-        write(fd,temp.c_str(),temp.size());
-        temp=to_string(pair.second)+"\n";
-        write(fd,temp.c_str(),temp.size());
-        cout << "{" << pair.first << ": " << pair.second << "}"<<endl;
-    }
+    write(fd,temp.c_str(),temp.size());
     close(fd);
     exit(0);
 }

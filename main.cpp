@@ -36,9 +36,6 @@ int main(int argc, char const *argv[])
         }
         break;
     }
-    if(pipe(p)<0){
-        cout<<"error making pipe"<<endl;
-    }
     if(pipe(p2)<0){
         cout<<"error making pipe"<<endl;
     }
@@ -49,12 +46,16 @@ int main(int argc, char const *argv[])
         execv(REDUCER.c_str(),argv_list_map);
     }
     for(int j=1;j<i;j++){
-        file_name="testcases/" + to_string(j) + ".csv";
+        if(pipe(p)<0){
+            cout<<"error making pipe"<<endl;
+        }
         write(p[1],to_string(j).c_str(),to_string(j).size());
         if((pid=fork())==0){
             dup2(p[0], STDIN_FILENO);
             execv(MAPPER.c_str(),argv_list_map);
         }
+        close(p[0]);
+        close(p[1]);
     }
     for(int j=1;j<=i;j++){
         wait(NULL);

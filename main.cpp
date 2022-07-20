@@ -15,20 +15,20 @@ using namespace std;
 
 const string MAPPER="mapper";
 const string REDUCER="reducer";
-const string FIFO_ADDR="tmp/fifo";
+const string FIFO_ADDR="../tmp/fifo";
 
 int main(int argc, char const *argv[])
 {
     string addr=FIFO_ADDR;
     int i=1,pid;
-    char * argv_list_map[] = {"mapper","tmp/fifo",NULL};
+    char * argv_list_map[] = {"mapper","../tmp/fifo",NULL};
     int p[2];
     int p2[2];
     char output[1024];
     string file_name;
     string res;
     while(true){
-        file_name="testcases/" + to_string(i) + ".csv";
+        file_name="../testcases/" + to_string(i) + ".csv";
         if (FILE *file = fopen(file_name.c_str(), "r")) {
             fclose(file);
             i++;
@@ -65,10 +65,10 @@ int main(int argc, char const *argv[])
         continue;
     }
 
-    int f1=open("output.csv",O_CREAT|O_RDWR,0666);
+    int f1=open("../output.csv",O_CREAT|O_RDWR,0666);
     close(f1);
-    unlink("output.csv");
-    f1=open("output.csv",O_CREAT|O_RDWR,0666);
+    unlink("../output.csv");
+    f1=open("../output.csv",O_CREAT|O_RDWR,0666);
     write(f1,output,strlen(output));
     close(f1);
     close(p[0]);

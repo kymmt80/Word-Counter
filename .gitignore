@@ -1,4 +1,4 @@
-*.csv
+output.csv
 mapper
 reducer
 main

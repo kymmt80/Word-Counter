@@ -18,7 +18,7 @@ int main(int argc, char const *argv[])
     char file_number[10];
     read(STDIN_FILENO,file_number,10);
     string fn=file_number;
-    string FIFO_ADDR="fifo"+fn;
+    string FIFO_ADDR="tmp/fifo"+fn;
     string file_name="testcases/" + fn + ".csv",temp;
     fstream file;
     file.open(file_name);

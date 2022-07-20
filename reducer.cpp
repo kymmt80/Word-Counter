@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
 {
     int fcount;
     char file_count[10];
-    string FIFO_ADDR = "fifo";
+    string FIFO_ADDR = "tmp/fifo";
     map<string, int> word_map;
     string out, count, temp;
     stringstream ss;

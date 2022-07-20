@@ -8,3 +8,8 @@ mapper: mapper.cpp
 
 reducer: reducer.cpp
 	g++ reducer.cpp -o reducer
+
+.PHONY : run
+
+run: main mapper reducer
+	mkdir tmp && ./main && rm -r tmp

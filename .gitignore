@@ -3,3 +3,4 @@ mapper
 reducer
 main
 .vscode
+*.zip
